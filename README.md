@@ -1,6 +1,8 @@
 # SwiftDI
-SwiftDI it's a tool for Dependency Injection using  `@propertyWrapper`. Right now SwiftDI is alpha version. **Be careful!**
 
+![CI](https://github.com/diegostamigni/SwiftDI/workflows/CI/badge.svg)
+
+SwiftDI it's a tool for Dependency Injection using  `@propertyWrapper`. Right now SwiftDI is alpha version. **Be careful!**
 SwiftDI works with Swift >= 5.1 only and SwiftUI. 
 
 Please looks at our demo `SwiftDIDemo`!
