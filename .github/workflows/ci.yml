@@ -10,29 +10,24 @@ on:
 
 jobs:
   SwiftLint:
-   runs-on: ubuntu-latest
-   steps:
-   - uses: actions/checkout@v1
-   - name: GitHub Action for SwiftLint
-     uses: norio-nomura/action-swiftlint@3.1.0
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: GitHub Action for SwiftLint
+        uses: norio-nomura/action-swiftlint@3.1.0
        
   Test:
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@master
-      with:
-        lfs: 'true'
-    - name: Xcode Select
-      uses: devbotsxyz/xcode-select@v1.0.0
-      with:
-        version: "12.0"
-        beta: false
-    - name: Install Cocoapod Dependencies
-      run: |
-        pod repo update
-        pod install
-      shell: bash
-    - name: Resolve Swift Package Manager Dependencies
-      run:  xcodebuild -resolvePackageDependencies
-    - name: Build and Test
-      run: xcodebuild -workspace Generaize.xcworkspace -scheme Generaize -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (2nd generation)' test
+      - uses: actions/checkout@master
+        with:
+          lfs: 'true'
+      - name: Xcode Select
+        uses: devbotsxyz/xcode-select@v1.0.0
+        with:
+          version: "12.0"
+          beta: false
+      - name: Resolve Swift Package Manager Dependencies
+        run:  xcodebuild -resolvePackageDependencies
+      - name: Build and Test
+        run: xcodebuild -project SwiftDIDemo/SwiftDIDemo.xcodeproj -scheme SwiftDIDemo -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone SE (2nd generation)" build
