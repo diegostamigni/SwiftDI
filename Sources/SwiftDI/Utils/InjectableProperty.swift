@@ -14,7 +14,7 @@ protocol InjectableProperty {
 
 extension InjectableProperty {
     var bundle: Bundle? {
-        return (type as? AnyClass).flatMap { Bundle(for: $0) }
+        (type as? AnyClass).flatMap { Bundle(for: $0) }
     }
 }
 

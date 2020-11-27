@@ -9,20 +9,28 @@ import Foundation
 
 class DIComponentManager {
     
-    let locker = NSRecursiveLock()
+    private let locker = NSRecursiveLock()
     
-    lazy var registerContainers: [ObjectIdentifier: DIObject] = [:]
+    lazy private var registerContainers: [ObjectIdentifier: DIObject] = [:]
     
-    func insert<T>(_ object: DIObject, forType type: T.Type) {
-        locker.sync { self.registerContainers[ObjectIdentifier(type)] = object }
+    func insert<T>(_ object: DIObject, forType: T.Type) {
+		locker.sync { self.registerContainers[ObjectIdentifier(type(of: forType))] = object }
     }
     
-    subscript(_ type: Any.Type) -> DIObject? {
-        return locker.sync { self.registerContainers[ObjectIdentifier(type)] }
+    subscript(_ forType: Any.Type) -> DIObject? {
+		locker.sync { self.registerContainers[ObjectIdentifier(type(of: forType))] }
     }
     
     var objects: [DIObject] {
-        return locker.sync { self.registerContainers.values.compactMap{ $0 } }
+        locker.sync { self.registerContainers.values.compactMap({ $0 }) }
     }
+
+	var description: String {
+		registerContainers.description
+	}
+
+	func merge(other: DIComponentManager) {
+		self.registerContainers.merge(other.registerContainers)  { _, new in new }
+	}
     
 }

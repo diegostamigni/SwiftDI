@@ -27,7 +27,7 @@ class DIResolver {
         if let object = makeObject(for: T.self, bundle: bundle, usingObject: nil) {
             return object as! T
         } else {
-            fatalError("Couldn't found object for type \(T.self)")
+            fatalError("Couldn't find object for type \(T.self)")
         }
     }
     
@@ -82,11 +82,12 @@ class DIResolver {
     
     func findObject(for type: Any.Type, bundle: Bundle?) -> DIObject {
         guard let object = self.container.componentManager[type] else {
-            fatalError("Can't found object for type \(type)")
+            fatalError("Can't find object for type \(type)")
         }
+
         if let bundle = bundle {
             if object.bundle != bundle {
-                fatalError("Bundles isn't equals")
+                fatalError("Bundles aren't equals")
             }
         }
         

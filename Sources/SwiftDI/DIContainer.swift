@@ -10,7 +10,7 @@ import Foundation
 public final class DIContainer: CustomStringConvertible {
     
     public var description: String {
-        return componentManager.registerContainers.description
+        return componentManager.description
     }
     
     var componentManager: DIComponentManager
@@ -62,8 +62,7 @@ public final class DIContainer: CustomStringConvertible {
     }
     
     func mergeContainers(_ componentManager: DIComponentManager) {
-        let newContainers = componentManager.registerContainers
-        self.componentManager.registerContainers.merge(newContainers) { _, new in new }
+		self.componentManager.merge(other: componentManager)
     }
     
 }

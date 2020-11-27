@@ -35,7 +35,7 @@ extension DILifeCycle: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case .single: return "single"
-        case .prototype: return "protorype"
+        case .prototype: return "prototype"
         case .weakSingle: return "weakSingle"
         case .objectGraph: return "objectGraph"
         }

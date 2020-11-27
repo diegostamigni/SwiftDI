@@ -19,7 +19,7 @@ public struct DIBuilder {
 }
 
 extension DIBuilder {
-    public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> DITuplePart<(C0, C1)> where C0: DIPart, C1: DIPart {
+	public static func buildBlock<C0, C1>(_ c0: C0, _ c1: C1) -> DITuplePart<(C0, C1)> where C0: DIPart, C1: DIPart {
         return .init((c0, c1))
     }
     
